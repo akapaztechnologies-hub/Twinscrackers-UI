@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm create vite@latest . -- --template react-ts)",
+      "Bash(npm install)",
+      "WebFetch(domain:www.fireworks.com)",
+      "WebFetch(domain:www.epicfireworks.com)",
+      "WebFetch(domain:www.uline.com)",
+      "Bash(npm run build)",
+      "Bash(npx --yes sharp-cli:*)",
+      "Bash(npx sharp-cli:*)",
+      "Bash(find:*)",
+      "Bash(npx vite build:*)",
+      "Bash(git status:*)"
+    ]
+  }
+}

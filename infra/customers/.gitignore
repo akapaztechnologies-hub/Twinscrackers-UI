@@ -1,0 +1,3 @@
+# A customer file holds that customer's Cloudflare login. Only the template is committed.
+*.env
+!_template.env

@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--
+      Every brand value below is a build-time default filled from env by the
+      `brand-html` plugin in vite.config.ts. The inlined boot script at the end
+      of <head> overwrites them with whatever the admin has saved, and the
+      Cloudflare Pages middleware (functions/_middleware.js) rewrites them at
+      the edge so crawlers and first-time visitors see the live brand too.
+      Nothing here is a hard-coded shop name — do not reintroduce one.
+    -->
+    <link rel="icon" href="{{BRAND_LOGO}}" />
+    <link rel="apple-touch-icon" href="{{BRAND_LOGO}}" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <title>{{BRAND_NAME}} — {{BRAND_TAGLINE}}</title>
+    <meta name="description" content="{{BRAND_DESCRIPTION}}" />
+    <meta name="author" content="{{BRAND_NAME}}" />
+    <meta name="theme-color" content="{{BRAND_THEME_COLOR}}" />
+    <meta name="keywords" content="{{BRAND_KEYWORDS}}" />
+    <meta property="og:title" content="{{BRAND_NAME}} — {{BRAND_TAGLINE}}" />
+    <meta property="og:description" content="{{BRAND_DESCRIPTION}}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="{{BRAND_URL}}" />
+    <meta property="og:site_name" content="{{BRAND_NAME}}" />
+    <meta property="og:image" content="{{BRAND_LOGO_ABSOLUTE}}" />
+    <meta property="og:locale" content="en_IN" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="{{BRAND_NAME}} — {{BRAND_TAGLINE}}" />
+    <meta name="twitter:description" content="{{BRAND_DESCRIPTION}}" />
+    <meta name="twitter:image" content="{{BRAND_LOGO_ABSOLUTE}}" />
+    <link rel="canonical" href="{{BRAND_URL}}" />
+    <meta name="geo.region" content="{{BRAND_REGION_CODE}}" />
+    <meta name="geo.placename" content="{{BRAND_LOCALITY}}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://images.unsplash.com" />
+    <!-- Preload hero image for fast LCP -->
+    <link rel="preload" as="image" href="https://images.unsplash.com/photo-1498931299472-f7a63a5a1cfa?w=1920&q=80" fetchpriority="high" />
+    <!-- Non-render-blocking font loading -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800;900&display=swap" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet" /></noscript>
+    <!--BRAND_BOOT-->
+  </head>
+  <body class="font-body antialiased">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

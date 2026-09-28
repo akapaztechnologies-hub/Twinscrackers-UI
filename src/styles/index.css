@@ -1,0 +1,184 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /**
+   * The palette, as space-separated RGB triplets so that Tailwind's
+   * `rgb(var(--x) / <alpha-value>)` colours can still take opacity modifiers
+   * like `bg-brand-500/30`.
+   *
+   * THESE ARE DEFINED ON :root ONLY AND ARE NEVER REDEFINED UNDER .dark.
+   *
+   * Light and dark are expressed by *which shade a utility picks* —
+   * `bg-white dark:bg-surface-900` — not by changing what a shade means.
+   * Flipping any of these inside `.dark` would double-invert every one of the
+   * ~2,700 `text-surface-* dark:text-surface-*` pairs in the app. If you find
+   * yourself wanting a `.dark { --surface-...: }` rule, what you actually want
+   * is a different shade in the utility. (The dead `--color-*` block that used
+   * to live here did redefine under .dark, which is why this warning exists.)
+   *
+   * These literals are byte-for-byte the palette the site shipped with, and
+   * they are the last line of defence: what renders with JS disabled, before
+   * /content/branding answers, and on a first-ever visit. brand-boot.js
+   * overrides them with an inline style on <html>, which always wins.
+   */
+  :root {
+    --brand-50: 255 249 230;
+    --brand-100: 255 240 191;
+    --brand-200: 255 230 153;
+    --brand-300: 255 219 115;
+    --brand-400: 244 208 63;
+    --brand-500: 212 175 55;
+    --brand-600: 184 150 11;
+    --brand-700: 139 114 9;
+    --brand-800: 94 77 6;
+    --brand-900: 49 40 3;
+    --brand-on: 17 17 17;
+
+    --fire-50: 255 243 237;
+    --fire-100: 255 224 204;
+    --fire-200: 255 191 153;
+    --fire-300: 255 158 102;
+    --fire-400: 255 125 51;
+    --fire-500: 255 107 53;
+    --fire-600: 229 90 43;
+    --fire-700: 204 74 34;
+    --fire-800: 153 55 24;
+    --fire-900: 102 37 15;
+    --fire-on: 17 17 17;
+
+    --surface-0: 255 255 255;
+    --surface-50: 250 250 250;
+    --surface-100: 245 245 245;
+    --surface-200: 229 229 229;
+    --surface-300: 212 212 212;
+    --surface-400: 163 163 163;
+    --surface-500: 115 115 115;
+    --surface-600: 82 82 82;
+    --surface-700: 64 64 64;
+    --surface-800: 38 38 38;
+    --surface-850: 26 26 26;
+    --surface-900: 17 17 17;
+    --surface-950: 10 10 10;
+
+    /* Derived, so overriding --brand-500 re-tints the glow for free: custom
+       properties substitute at use time, not at declaration time. */
+    --brand-glow: rgb(var(--brand-500) / 0.15);
+    --brand-glow-lg: rgb(var(--brand-500) / 0.2);
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  /* Hide native number-input spin arrows everywhere — every numeric field in
+     the admin UI already ships its own +/- controls or is a plain amount box,
+     so the browser's built-in arrows only ever duplicate or crowd them. */
+  input[type='number'] {
+    -moz-appearance: textfield;
+  }
+  input[type='number']::-webkit-outer-spin-button,
+  input[type='number']::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-surface-50 text-surface-950 dark:bg-surface-950 dark:text-surface-100;
+    @apply transition-colors duration-300;
+    font-feature-settings: 'rlig' 1, 'calt' 1;
+  }
+
+  ::selection {
+    @apply bg-brand-500/30 text-brand-900 dark:text-brand-100;
+  }
+
+  /* Premium scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-surface-300 dark:bg-surface-700 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-surface-400 dark:bg-surface-600;
+  }
+}
+
+@layer components {
+  .container-premium {
+    @apply mx-auto w-full max-w-container px-4 sm:px-6 lg:px-8 xl:px-12;
+  }
+
+  .container-content {
+    @apply mx-auto w-full max-w-content px-4 sm:px-6 lg:px-8;
+  }
+
+  .container-narrow {
+    @apply mx-auto w-full max-w-narrow px-4 sm:px-6 lg:px-8;
+  }
+
+  .section-padding {
+    @apply py-16 sm:py-20 lg:py-24 xl:py-32;
+  }
+
+  .text-gradient-brand {
+    @apply bg-gradient-to-r from-brand-400 via-brand-500 to-brand-600 bg-clip-text text-transparent;
+  }
+
+  .text-gradient-fire {
+    @apply bg-gradient-to-r from-fire-400 via-fire-500 to-fire-600 bg-clip-text text-transparent;
+  }
+
+  .glass-card {
+    @apply bg-white/80 dark:bg-surface-900/80 backdrop-blur-xl border border-surface-200/50 dark:border-surface-800/50;
+  }
+
+  .glass-nav {
+    @apply bg-white/90 dark:bg-surface-950/90 backdrop-blur-xl border-b border-surface-200/50 dark:border-surface-800/50;
+  }
+
+  .shimmer-bg {
+    @apply bg-gradient-to-r from-surface-200 via-surface-100 to-surface-200 dark:from-surface-800 dark:via-surface-850 dark:to-surface-800;
+    background-size: 200% 100%;
+  }
+
+  .input-field {
+    @apply w-full px-3 py-2 rounded-xl border border-surface-200 dark:border-surface-700 bg-white dark:bg-surface-800 text-body-sm text-surface-900 dark:text-surface-100 placeholder:text-surface-400 transition-colors;
+  }
+
+  .input-field:focus {
+    @apply outline-none ring-2 ring-brand-500/30 border-brand-500;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
